@@ -1,0 +1,304 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   theme.css  —  CSS variables + Bootstrap overrides for dark/light themes
+   ─────────────────────────────────────────────────────────────────────────
+   Active theme is set via [data-theme] on <html>.
+   Every component uses var(--*) tokens. Never use hardcoded colors in
+   Python callbacks — use helpers/theme.py tokens instead.
+*/
+
+/* ── Variables ──────────────────────────────────────────────────────────── */
+:root {
+  --bg:         #0d0f14;
+  --bg-alt:     #13161e;
+  --bg-card:    #1a1d27;
+  --text:       #e2e8f0;
+  --text-muted: #94a3b8;
+  --border:     #1f2433;
+  --accent:     #38bdf8;
+  --success:    #34d399;
+  --warning:    #fbbf24;
+  --danger:     #f87171;
+  --grid:       #1f2433;
+}
+
+[data-theme="light"] {
+  --bg:         #f8fafc;
+  --bg-alt:     #f1f5f9;
+  --bg-card:    #ffffff;
+  --text:       #1e293b;
+  --text-muted: #64748b;
+  --border:     #e2e8f0;
+  --accent:     #0284c7;
+  --success:    #16a34a;
+  --warning:    #d97706;
+  --danger:     #dc2626;
+  --grid:       #e2e8f0;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+html, body, #react-entry-point, ._dash-loading {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.sidebar {
+  background-color: var(--bg-alt);
+  border-right: 1px solid var(--border);
+}
+
+/* ── Labels ─────────────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+.form-label, label {
+  color: var(--text-muted) !important;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+/* ── Inputs ─────────────────────────────────────────────────────────────── */
+.form-control, .form-select {
+  background-color: var(--bg-card) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  font-size: 12px;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-card) !important;
+  color: var(--text) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(56,189,248,0.15) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+.btn-success {
+  background-color: var(--success) !important;
+  border-color: var(--success) !important;
+  color: #fff !important;
+}
+.btn-secondary {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.btn-secondary:hover {
+  background-color: var(--border) !important;
+}
+.btn-outline-secondary {
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+  background-color: transparent !important;
+}
+.btn-outline-secondary:hover {
+  background-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.btn-outline-info {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background-color: transparent !important;
+}
+.btn-outline-danger {
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+  background-color: transparent !important;
+}
+.btn:disabled {
+  opacity: 0.4 !important;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────── */
+.nav-tabs {
+  border-bottom-color: var(--border) !important;
+}
+.nav-tabs .nav-link {
+  color: var(--text-muted) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--text) !important;
+  border-color: transparent !important;
+}
+.nav-tabs .nav-link.active {
+  color: var(--accent) !important;
+  background-color: var(--bg) !important;
+  border-color: var(--border) var(--border) var(--bg) !important;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.card {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.card-header {
+  background-color: transparent !important;
+  border-bottom-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.card-body { color: var(--text) !important; }
+
+/* ── Tables ─────────────────────────────────────────────────────────────── */
+.table {
+  color: var(--text) !important;
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+}
+
+/* All cells in all tables always use --text */
+.table > :not(caption) > * > *,
+table > :not(caption) > * > *,
+th, td, tr {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+/* ── Alerts — ALL colors themed ─────────────────────────────────────────── */
+
+/* Base: every alert's inner text uses --text by default */
+.alert {
+  color: var(--text) !important;
+}
+
+/* Every element inside any alert inherits --text */
+.alert *,
+.alert p, .alert span, .alert div,
+.alert table, .alert th, .alert td, .alert tr,
+.alert strong, .alert small {
+  color: inherit !important;
+}
+
+/* Semantic overrides on top of the base */
+.alert-primary {
+  background-color: rgba(56,189,248,0.08) !important;
+  color: var(--accent) !important;
+  border-color: rgba(56,189,248,0.25) !important;
+}
+.alert-info {
+  background-color: rgba(56,189,248,0.08) !important;
+  color: var(--accent) !important;
+  border-color: rgba(56,189,248,0.25) !important;
+}
+.alert-success {
+  background-color: rgba(52,211,153,0.08) !important;
+  color: var(--success) !important;
+  border-color: rgba(52,211,153,0.25) !important;
+}
+.alert-warning {
+  background-color: rgba(251,191,36,0.08) !important;
+  color: var(--warning) !important;
+  border-color: rgba(251,191,36,0.25) !important;
+}
+.alert-danger {
+  background-color: rgba(248,113,113,0.08) !important;
+  color: var(--danger) !important;
+  border-color: rgba(248,113,113,0.25) !important;
+}
+.alert-secondary {
+  background-color: var(--bg-alt) !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border) !important;
+}
+
+/* Tables inside alerts — must override Bootstrap's alert-color cascade */
+.alert .table,
+.alert table {
+  color: var(--text) !important;
+}
+.alert .table > :not(caption) > * > *,
+.alert table th,
+.alert table td {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* ── Checkboxes / Radios ────────────────────────────────────────────────── */
+.form-check-label {
+  color: var(--text) !important;
+}
+.form-check-input {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+.form-check-input:checked {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ── Upload ─────────────────────────────────────────────────────────────── */
+.dash-upload {
+  background-color: var(--bg-card) !important;
+  color: var(--text) !important;
+  border: 1px dashed var(--border) !important;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.dash-upload:hover {
+  border-color: var(--accent) !important;
+}
+
+/* ── Utility classes ────────────────────────────────────────────────────── */
+.status-ok      { color: var(--success) !important; }
+.status-err     { color: var(--danger)  !important; }
+.status-warn    { color: var(--warning) !important; }
+.status-muted   { color: var(--text-muted) !important; }
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.header-bar {
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg);
+}
+
+.version-badge {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  background-color: var(--border);
+  color: var(--text-muted);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ── Loading spinner ────────────────────────────────────────────────────── */
+._dash-loading-callback {
+  background-color: var(--bg) !important;
+}

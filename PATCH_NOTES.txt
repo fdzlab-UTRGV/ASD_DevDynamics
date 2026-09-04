@@ -1,0 +1,46 @@
+Phenotypic Architecture ASD v4.3 ridge-export — reproducibility patch
+Date: 2026-08-27
+
+Changes made
+============
+1. Benjamini-Hochberg FDR in modules/mass_univariate.py now excludes NaN/inf
+   entries from the number and ranks of tests. Invalid entries remain NaN.
+
+2. Step-1 runs now receive a run_id. The main sqrt_dr2_results.csv export also
+   records run_id, covariates, and n_tests.
+
+3. The suppressor callback now reuses the covariates stored with the Step-1
+   result instead of reading the current live covariate selector. This prevents
+   silent model-specification drift after Step 1 is run.
+
+4. Suppressor results now retain and export, for both base and augmented runs:
+     - raw p-values
+     - FDR q-values
+     - per-cell N
+     - number of valid tests
+   plus suppressor, covariates, selected FDR threshold, and source_run_id.
+
+5. Suppressor export filenames are sanitized so variable names containing '/'
+   cannot create path-like filenames.
+
+6. figures_cellpress_fixed.py no longer imports Step-1 q-values into Figure 5.
+   Its primary hub-rank persistence statistic uses all suppressor cells.
+   When the new side-specific q-values are present it also reports a separately
+   labelled sensitivity rho using q<.05 independently on each side.
+
+7. The leading whitespace before the opening module docstring in the uploaded
+   figure script was removed so the file compiles.
+
+Deliberately NOT changed
+========================
+- The available-case strategy for base vs full models.
+- The fact that adding a suppressor can change the available participant set.
+  These were retained because they are intentional/reportable analysis choices.
+
+Validation
+==========
+- All Python files in the patched app compile successfully.
+- BH test [0.001, 0.010, 0.040, NaN, NaN] returns
+  [0.003, 0.015, 0.040, NaN, NaN].
+- New suppressor export columns reconstruct separate base/aug q and N matrices.
+- Corrected Figure 5 renders successfully from synthetic suppressor data.

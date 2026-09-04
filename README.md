@@ -6,9 +6,9 @@ This Dash application reproduces all analyses reported in the paper using
 SPARK phenotypic data (pairwise analytic Ns ranged 1,842–105,261).
 
 > **Note:** This repository contains the analysis application only. The
-> figure-generation script is available from the lead contact on request. 
-> The figure references below map each tab to the analyses that underlie 
-> the corresponding paper figures.
+> figure-generation script (`figures_cellpress`) is maintained separately and
+> is available from the lead contact on request. The figure references below
+> map each tab to the analyses that underlie the corresponding paper figures.
 
 ---
 
