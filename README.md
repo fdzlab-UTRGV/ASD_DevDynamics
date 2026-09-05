@@ -1,6 +1,6 @@
 # Developmental Dynamics of Phenotypic Architecture in ASD
 
-**Fernandez, A. — Cell Reports Medicine**
+
 
 This Dash application reproduces all analyses reported in the paper using
 SPARK phenotypic data (pairwise analytic Ns ranged 1,842–105,261).
